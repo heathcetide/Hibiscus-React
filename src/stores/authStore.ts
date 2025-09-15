@@ -9,7 +9,7 @@ interface AuthState {
   token: string | null
   login: (token: string) => Promise<boolean>
   register: (data: RegisterUserForm) => Promise<boolean>
-  logout: () => Promise<void>
+  logout: (next?: string) => Promise<void>
   setLoading: (loading: boolean) => void
   refreshUserInfo: () => Promise<void>
   updateProfile: (data: Partial<User>) => void
@@ -72,10 +72,10 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      logout: async () => {
+      logout: async (next?: string) => {
         try {
           // 调用登出API
-          const response = await logoutUser()
+          const response = await logoutUser(next)
           if (response.code !== 200) {
             console.warn('Logout API warning:', response.msg)
           }

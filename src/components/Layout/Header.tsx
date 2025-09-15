@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, User, LogOut, Settings, Layout } from 'lucide-react'
+import { Menu, X, User, LogOut, Settings, Layout, Bell } from 'lucide-react'
 import Button from '../UI/Button'
 import EnhancedThemeToggle from '../UI/EnhancedThemeToggle'
 import { useAuthStore } from '@/stores/authStore.ts'
 import { useUIStore } from '@/stores/uiStore'
+import { useNotificationStore } from '@/stores/notificationStore'
 import AuthModal from '../Auth/AuthModal'
+import { showAlert } from '@/utils/notification'
 
 interface HeaderProps {
   logo?: {
@@ -53,6 +55,7 @@ const Header = ({
 
   const { user, isAuthenticated, logout } = useAuthStore()
   const { layoutType, setLayoutType } = useUIStore()
+  const { unreadCount, fetchUnreadCount} = useNotificationStore()
 
   const isActive = (path: string, exact: boolean = false) => {
     if (exact) {
@@ -60,6 +63,16 @@ const Header = ({
     }
     return location.pathname.startsWith(path) && path !== '/'
   }
+
+  // 获取未读通知数量
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchUnreadCount()
+      // 每30秒刷新一次未读数量
+      const interval = setInterval(fetchUnreadCount, 30000)
+      return () => clearInterval(interval)
+    }
+  }, [isAuthenticated, fetchUnreadCount])
 
 
   return (
@@ -203,6 +216,29 @@ const Header = ({
             {/* Theme Toggle */}
             {showThemeToggle && <EnhancedThemeToggle />}
 
+            {/* Notification Bell */}
+            {isAuthenticated && (
+              <Link to="/notifications">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                  title="通知中心"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full min-w-[18px] h-[18px] flex items-center justify-center font-medium"
+                    >
+                      {unreadCount > 99 ? '99+' : unreadCount}
+                    </motion.div>
+                  )}
+                </motion.button>
+              </Link>
+            )}
+
             {/* User Menu or Auth Buttons */}
             {showUserMenu && (
               isAuthenticated ? (
@@ -250,6 +286,7 @@ const Header = ({
                                 onClick={() => {
                                   logout()
                                   setShowUserMenuDropdown(false)
+                                  showAlert('退出登录成功', 'success', '用户退出登录成功')
                                 }}
                                 className="flex items-center space-x-3 px-3 py-2 rounded-sm hover:bg-destructive/10 text-destructive transition-colors w-full"
                             >

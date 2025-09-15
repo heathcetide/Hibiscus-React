@@ -147,6 +147,7 @@ export const refreshToken = async (): Promise<ApiResponse<{ token: string }>> =>
 }
 
 // 登出 - 对应 GET /auth/logout
-export const logoutUser = async (): Promise<ApiResponse<null>> => {
-  return get<null>('/auth/logout')
+export const logoutUser = async (next?: string): Promise<ApiResponse<null>> => {
+  const params = next ? { next } : undefined
+  return get<null>('/auth/logout', { params })
 }
