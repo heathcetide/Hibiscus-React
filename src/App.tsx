@@ -11,6 +11,8 @@ import Profile from "@/pages/Profile.tsx";
 import NotificationContainer from "@/components/UI/NotificationContainer.tsx";
 import {lazy} from "react";
 import AnimationShowcase from "@/pages/AnimationShowcase.tsx";
+import About from "@/pages/About.tsx";
+import AdvancedPerformanceMonitor from "@/components/Performance/AdvancedPerformanceMonitor.tsx";
 
 // 懒加载非关键页面
 const LazyAdvancedShowcase = lazy(() => import('./pages/AdvancedShowcase'))
@@ -27,6 +29,7 @@ function App() {
                             <Route path="/advanced-showcase" element={<LazyAdvancedShowcase />} />
                             <Route path="/animation-showcase" element={<AnimationShowcase />} />
                             <Route path="/profile" element={<Profile />} />
+                            <Route path="/about" element={<About />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </LayoutFactory>
@@ -46,6 +49,15 @@ function App() {
 
                     {/* 自定义通知系统 */}
                     <NotificationContainer />
+
+                    {/* 性能监控 */}
+                    <AdvancedPerformanceMonitor
+                        showMetrics={true}
+                        showMemory={true}
+                        showNetwork={true}
+                        autoHide={true}
+                        hideDelay={10000}
+                    />
                 </div>
             </Router>
         </ErrorBoundary>
