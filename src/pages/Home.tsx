@@ -1,5 +1,6 @@
 // Home.tsx
 import React from 'react';
+import {Typewriter} from "@/components/UX/MicroInteractions.tsx";
 
 const Home: React.FC = () => {
     return (
@@ -9,7 +10,7 @@ const Home: React.FC = () => {
                     Hello, World!
                 </h1>
                 <p className="text-lg text-gray-700 dark:text-gray-300">
-                    欢迎使用Hibiscus-React
+                    <Typewriter text="欢迎使用Hibiscus-React" />
                 </p>
             </div>
         </div>
