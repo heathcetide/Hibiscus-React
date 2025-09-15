@@ -9,7 +9,7 @@ const Home: React.FC = () => {
                     Hello, World!
                 </h1>
                 <p className="text-lg text-gray-700 dark:text-gray-300">
-                    欢迎来到 WriteWiz 应用
+                    欢迎使用Hibiscus-React
                 </p>
             </div>
         </div>
