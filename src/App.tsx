@@ -4,6 +4,7 @@ import Layout from "@/components/Layout/Layout.tsx";
 import PWAInstaller from "@/components/PWA/PWAInstaller.tsx";
 import ComponentLibrary from "@/pages/ComponentLibrary.tsx";
 import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary.tsx";
+import DevErrorHandler from "@/components/Dev/DevErrorHandler.tsx";
 
 function App() {
     return (
@@ -16,12 +17,16 @@ function App() {
                             <Route path="/component-library" element={<ComponentLibrary />} />
                         </Routes>
                     </Layout>
+
                     {/* PWA 安装提示 */}
                     <PWAInstaller
                         showOnLoad={true}
                         delay={5000}
                         position="bottom-right"
                     />
+
+                    {/* 开发环境错误处理 */}
+                    <DevErrorHandler />
                 </div>
             </Router>
         </ErrorBoundary>

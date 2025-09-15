@@ -35,8 +35,28 @@ import EpicRatingEffect from "@/components/UI/EpicRatingEffect.tsx";
 import FileUpload from '@/components/UI/FileUpload'
 import IconText from '@/components/UI/IconText'
 import {HoverCard, Pulse, ScrollReveal, Skeleton, Typewriter} from "@/components/UX/MicroInteractions.tsx";
+import PageTurner from "@/components/UI/PageTurner.tsx";
 
 const ComponentLibrary: React.FC = () => {
+    const [currentPage, setCurrentPage] = useState(1)
+    const totalPages = 200  // 假设有200页
+    // 页数变化时调用
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page)
+    }
+
+    // 收藏页面
+    const handleBookmark = (page: number) => {
+        console.log(`页面 ${page} 已收藏`)
+    }
+
+    // 自动保存
+    const handleAutoSave = (page: number) => {
+        console.log(`自动保存到页面 ${page}`)
+    }
+
+    // 假设你有一些书签
+    const bookmarks = [1, 50, 100]
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const [files, setFiles] = useState<File[]>([])
     const [dragData, setDragData] = useState<string | null>(null)
@@ -1501,6 +1521,54 @@ const ComponentLibrary: React.FC = () => {
                                 </div>
                             )}
                         </DragSort>`
+        },
+        {
+            id: 'PageTurner',
+            name: 'PageTurner',
+            icon: '翻页组件',
+            category: 'ui',
+            tags: ['基础', '交互', '翻页'],
+            demo: () => (
+                <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-neutral-900 p-4">
+                    <h1 className="text-xl text-center text-neutral-800 dark:text-white mb-6">
+                        电子书阅读器
+                    </h1>
+
+                    {/* PageTurner 组件 */}
+                    <PageTurner
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        onBookmark={handleBookmark}
+                        bookmarks={bookmarks}
+                        showPageNumbers={true}
+                        showProgress={true}
+                        autoSave={true}
+                        onAutoSave={handleAutoSave}
+                    />
+
+                    {/* 其他内容 */}
+                    <div className="mt-6 flex-grow">
+                        <h2 className="text-lg text-neutral-800 dark:text-white">第 {currentPage} 页的内容</h2>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                            这里是页面内容的展示区域。内容随着页数变化而变化。
+                        </p>
+                    </div>
+                </div>
+
+            ),
+            code: `{/* PageTurner 组件 */}
+                    <PageTurner
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        onBookmark={handleBookmark}
+                        bookmarks={bookmarks}
+                        showPageNumbers={true}
+                        showProgress={true}
+                        autoSave={true}
+                        onAutoSave={handleAutoSave}
+                    />`
         },
     ]
 
