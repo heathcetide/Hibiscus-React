@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { motion } from 'framer-motion'
 
 interface DevErrorHandlerProps {
   onError?: (error: Error) => void
@@ -40,22 +39,6 @@ const DevErrorHandler = ({ onError }: DevErrorHandlerProps) => {
 
   // 开发环境下的连接状态指示器
   if (import.meta.env.MODE !== 'development') return null
-
-  return (
-    <motion.div
-      className="fixed top-4 left-4 z-50 bg-yellow-100 border border-yellow-300 rounded-lg p-3 text-xs"
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-    >
-      <div className="flex items-center gap-2">
-        <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-        <span className="text-yellow-800 font-medium">开发模式</span>
-      </div>
-      <div className="text-yellow-700 mt-1">
-        WebSocket连接问题已修复
-      </div>
-    </motion.div>
-  )
 }
 
 export default DevErrorHandler
