@@ -9,6 +9,11 @@ import NotFound from "@/pages/NotFound.tsx";
 import AudioController from "@/components/UI/AudioController.tsx";
 import Profile from "@/pages/Profile.tsx";
 import NotificationContainer from "@/components/UI/NotificationContainer.tsx";
+import {lazy} from "react";
+import AnimationShowcase from "@/pages/AnimationShowcase.tsx";
+
+// 懒加载非关键页面
+const LazyAdvancedShowcase = lazy(() => import('./pages/AdvancedShowcase'))
 
 function App() {
     return (
@@ -19,6 +24,8 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/component-library" element={<ComponentLibrary />} />
+                            <Route path="/advanced-showcase" element={<LazyAdvancedShowcase />} />
+                            <Route path="/animation-showcase" element={<AnimationShowcase />} />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>

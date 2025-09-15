@@ -17,7 +17,7 @@ const MasonryLayout = ({ children }: MasonryLayoutProps) => {
             href: '/'
         }}
     />
-      <div className="max-w-7xl mx-auto p-6 lg:p-8">
+      <div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

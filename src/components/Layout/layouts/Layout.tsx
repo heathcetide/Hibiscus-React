@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Sidebar from "@/components/Layout/Sidebar.tsx";
 
 interface LayoutProps {
-  children: ReactNode
+    children: ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -18,15 +18,18 @@ const Layout = ({ children }: LayoutProps) => {
                     href: '/'
                 }}
             />
-            <div className="flex flex-1 overflow-hidden">
+            {/* 关键：让子项可以在 flex 容器内收缩 */}
+            <div className="flex flex-1 min-h-0">
                 <Sidebar />
-                <main className="flex-1 p-6 lg:p-8 overflow-hidden bg-white dark:bg-gray-800">
-                    <div className="h-full overflow-auto scrollbar-thin">
+                {/* 关键：限制 main 的最大高度为 90vh，并避免自身滚动干扰 */}
+                <main className="flex-1 p-6 lg:p-8 min-h-0 max-h-[90vh] overflow-hidden bg-white dark:bg-gray-800">
+                    {/* 关键：真正滚动的容器，超出 90vh 时出现滚动条 */}
+                    <div className="h-full max-h-[90vh] overflow-auto scrollbar-thin">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="max-w-7xl mx-auto h-full"
+                            className="max-w-7xl mx-auto"
                         >
                             {children}
                         </motion.div>
