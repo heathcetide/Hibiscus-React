@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, User, LogOut, Settings, Layout, Bell } from 'lucide-react'
+import { Menu, X, User, LogOut, Settings, Layout, Bell, Search } from 'lucide-react'
 import Button from '../UI/Button'
 import EnhancedThemeToggle from '../UI/EnhancedThemeToggle'
 import { useAuthStore } from '@/stores/authStore.ts'
 import { useUIStore } from '@/stores/uiStore'
 import { useNotificationStore } from '@/stores/notificationStore'
+import { useSearchStore } from '@/stores/searchStore'
 import AuthModal from '../Auth/AuthModal'
 import { showAlert } from '@/utils/notification'
 
@@ -56,6 +57,7 @@ const Header = ({
   const { user, isAuthenticated, logout } = useAuthStore()
   const { layoutType, setLayoutType } = useUIStore()
   const { unreadCount, fetchUnreadCount} = useNotificationStore()
+  const { openSearch } = useSearchStore()
 
   const isActive = (path: string, exact: boolean = false) => {
     if (exact) {
@@ -215,6 +217,17 @@ const Header = ({
 
             {/* Theme Toggle */}
             {showThemeToggle && <EnhancedThemeToggle />}
+
+            {/* Search Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={openSearch}
+              className="relative p-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+              title="搜索 (⌘K)"
+            >
+              <Search className="w-5 h-5" />
+            </motion.button>
 
             {/* Notification Bell */}
             {isAuthenticated && (

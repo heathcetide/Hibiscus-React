@@ -14,6 +14,7 @@ import AnimationShowcase from "@/pages/AnimationShowcase.tsx";
 import About from "@/pages/About.tsx";
 import NotificationCenter from "@/pages/NotificationCenter.tsx";
 import AdvancedPerformanceMonitor from "@/components/Performance/AdvancedPerformanceMonitor.tsx";
+import GlobalSearch from "@/components/UI/GlobalSearch.tsx";
 
 // 懒加载非关键页面
 const LazyAdvancedShowcase = lazy(() => import('./pages/AdvancedShowcase'))
@@ -86,6 +87,9 @@ function App() {
                         autoHide={true}
                         hideDelay={10000}
                     />
+
+                    {/* 全局搜索 */}
+                    <GlobalSearch />
                 </div>
             </Router>
         </ErrorBoundary>
