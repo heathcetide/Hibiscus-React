@@ -1,7 +1,7 @@
 {
-  "name": "WriteWiz - 智能写作助手",
-  "short_name": "WriteWiz",
-  "description": "一个强大的智能写作平台，提供小说创作、章节管理、角色设定等全方位写作工具",
+  "name": "Hibiscus-React",
+  "short_name": "Hibiscus",
+  "description": "极完善ReactDemoProject",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

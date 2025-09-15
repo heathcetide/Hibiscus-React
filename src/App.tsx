@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '@/pages/Home.tsx';
 import Layout from "@/components/Layout/Layout.tsx";
+import PWAInstaller from "@/components/PWA/PWAInstaller.tsx";
 
 function App() {
     return (
@@ -11,6 +12,12 @@ function App() {
                         <Route path="/" element={<Home />} />
                     </Routes>
                 </Layout>
+                {/* PWA 安装提示 */}
+                <PWAInstaller
+                    showOnLoad={true}
+                    delay={5000}
+                    position="bottom-right"
+                />
             </div>
         </Router>
     );
