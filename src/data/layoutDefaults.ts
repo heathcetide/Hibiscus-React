@@ -27,7 +27,7 @@ export const defaultGridItems: GridItem[] = Array.from({ length: 24 }, (_, index
   likes: Math.floor(Math.random() * 1000),
   views: Math.floor(Math.random() * 5000),
   featured: index % 7 === 0,
-  tags: ['React', 'TypeScript', 'UI/UX', '设计', '开发', '创新'][Math.floor(Math.random() * 6)]
+  tags: ['React', 'TypeScript', 'UI/UX', '设计', '开发', '创新'].slice(0, Math.floor(Math.random() * 3) + 1)
 }))
 
 export const defaultGridCategories = [
@@ -108,7 +108,7 @@ export const defaultGalleryItems: GalleryItem[] = Array.from({ length: 20 }, (_,
   likes: Math.floor(Math.random() * 1000),
   downloads: Math.floor(Math.random() * 500),
   featured: index % 8 === 0,
-  tags: ['摄影', '设计', '艺术', '创意'][Math.floor(Math.random() * 4)]
+  tags: ['摄影', '设计', '艺术', '创意'].slice(0, Math.floor(Math.random() * 2) + 1)
 }))
 
 export const defaultGalleryCategories = [
@@ -208,7 +208,7 @@ export const defaultProducts: Product[] = Array.from({ length: 24 }, (_, index) 
   isNew: index % 8 === 0,
   isSale: index % 6 === 0,
   discount: Math.floor(Math.random() * 30 + 10),
-  tags: ['热销', '新品', '推荐', '特价'][Math.floor(Math.random() * 4)]
+  tags: ['热销', '新品', '推荐', '特价'].slice(0, Math.floor(Math.random() * 2) + 1)
 }))
 
 export const defaultEcommerceCategories = [
@@ -320,7 +320,7 @@ export const defaultMasonryItems: MasonryItem[] = Array.from({ length: 12 }, (_,
   image: `https://picsum.photos/400/300?random=${index + 1}`,
   height: Math.floor(Math.random() * 200 + 200),
   category: ['设计', '开发', '创意', '技术'][index % 4],
-  tags: ['React', 'TypeScript', 'UI/UX', '设计', '开发', '创新'][Math.floor(Math.random() * 6)]
+  tags: ['React', 'TypeScript', 'UI/UX', '设计', '开发', '创新'].slice(0, Math.floor(Math.random() * 3) + 1)
 }))
 
 // 仪表板布局默认数据
@@ -339,15 +339,15 @@ export const defaultDashboardSidebarItems: DashboardSidebarItem[] = [
 
 // 管理后台布局默认数据
 export const defaultAdminSidebarItems: AdminSidebarItem[] = [
-  { id: 'dashboard', name: '仪表板', icon: null as any, count: null },
+  { id: 'dashboard', name: '仪表板', icon: null as any, count: undefined },
   { id: 'users', name: '用户管理', icon: null as any, count: 1247 },
-  { id: 'analytics', name: '数据分析', icon: null as any, count: null },
+  { id: 'analytics', name: '数据分析', icon: null as any, count: undefined },
   { id: 'content', name: '内容管理', icon: null as any, count: 89 },
-  { id: 'database', name: '数据库', icon: null as any, count: null },
-  { id: 'security', name: '安全设置', icon: null as any, count: null },
+  { id: 'database', name: '数据库', icon: null as any, count: undefined },
+  { id: 'security', name: '安全设置', icon: null as any, count: undefined },
   { id: 'reports', name: '报告', icon: null as any, count: 12 },
-  { id: 'monitoring', name: '监控', icon: null as any, count: null },
-  { id: 'settings', name: '系统设置', icon: null as any, count: null }
+  { id: 'monitoring', name: '监控', icon: null as any, count: undefined },
+  { id: 'settings', name: '系统设置', icon: null as any, count: undefined }
 ]
 
 // 杂志布局默认数据
